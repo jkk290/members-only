@@ -1,0 +1,25 @@
+{
+  "name": "members-only",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch app.js",
+    "generate-secret": "node -e \"console.log(require('crypto').randomBytes(64).toString('hex'))\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.2.1",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.16.3"
+  }
+}
