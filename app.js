@@ -20,6 +20,6 @@ app.use(session({
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false}));
 
-app.get('/', appRouter);
+app.use('/', appRouter);
 
 app.listen(PORT, () => console.log(`Members app listening on port ${PORT}`));
