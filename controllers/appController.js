@@ -1,9 +1,10 @@
+const passport = require('passport');
 const db = require('../storages/queries');
 const bcrypt = require('bcryptjs');
 
 exports.loginGet = (req, res) => {
     res.render('login', {
-        title: 'Members Only'
+        user: req.user
     });
 };
 
@@ -27,4 +28,18 @@ exports.signupPost = async (req, res, next) => {
     } catch (error) {
         return next(error);
     }
+};
+
+exports.loginPost = passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/'
+});
+
+exports.logoutPost = (req, res, next) => {
+    req.logout((error) => {
+        if (error) {
+            return next(error);
+        }
+        res.redirect('/');
+    });
 };
