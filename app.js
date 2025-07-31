@@ -7,6 +7,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const db = require('./storages/queries');
 const appRouter = require('./routes/appRouter');
+const msgRouter = require('./routes/msgRouter');
 
 const app = express();
 const PORT = process.env.APP_PORT;
@@ -56,6 +57,7 @@ passport.deserializeUser(async (id, done) => {
     }
 });
 
+app.use('/messages', msgRouter);
 app.use('/', appRouter);
 
 app.listen(PORT, () => console.log(`Members app listening on port ${PORT}`));

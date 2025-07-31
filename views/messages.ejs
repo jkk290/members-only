@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <%= title %>
+    <ul>
+        <% messages.forEach(message => { %>
+            <li>
+                <h2><%= message.title %></h2>
+                <p><%= message.msg %></p>
+                <% if (isMember == true) { %>
+                    <p>Added: <%= message.date_added %></p>
+                    <p>By: <%= message.author %></p>
+                <% } %>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>

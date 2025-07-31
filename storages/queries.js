@@ -20,7 +20,7 @@ async function getUser(username) {
 };
 
 async function getUserById(id) {
-    const { rows } = await pool.query('SELECT * FROM USERS WHERE id = $1', [id]);
+    const { rows } = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
     
     if (rows.length > 0) {
         return rows[0];
@@ -29,8 +29,30 @@ async function getUserById(id) {
     };
 };
 
+async function getAllMessages() {
+    const { rows } = await pool.query('SELECT * FROM messages');
+
+    if (rows.length > 0) {
+        return rows;
+    } else {
+        console.log('No messages in the database');
+    };
+};
+
+async function addMsg(message) {
+    console.log('Adding message: ', message);
+    await pool.query('INSERT INTO messages (title, msg, date_added, author) VALUES ($1, $2, $3, $4)', [
+        message.title,
+        message.msg,
+        message.date,
+        message.author
+    ]);
+};
+
 module.exports = {
     addUser,
     getUser,
-    getUserById
+    getUserById,
+    getAllMessages,
+    addMsg
 };

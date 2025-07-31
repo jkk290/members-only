@@ -35,22 +35,6 @@ exports.signupGet = (req, res) => {
     });
 };
 
-// exports.signupPost = async (req, res, next) => {
-//     try {
-//         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-//         const user = {
-//             firstName: req.body.firstName,
-//             lastName: req.body.lastName,
-//             username: req.body.username,
-//             password: hashedPassword
-//         };
-//         db.addUser(user);
-//         res.redirect('/');
-//     } catch (error) {
-//         return next(error);
-//     }
-// };
-
 exports.signupPost = [
     validateUser, 
     async (req, res) => {
@@ -80,7 +64,7 @@ exports.signupPost = [
 ];
 
 exports.loginPost = passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/messages',
     failureRedirect: '/'
 });
 
