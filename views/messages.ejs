@@ -7,6 +7,17 @@
 </head>
 <body>
     <%= title %>
+    <% if (isMember) { %>
+        <br>
+        <a href="/messages/add">New Message</a>
+    <% } else { %>
+        <br>
+        <a href="/members/enroll">Unlock member features </a>
+    <% } %>
+    <br>
+    <form action="/logout" method="POST">
+        <button type="submit">Logout</button>
+    </form>
     <ul>
         <% messages.forEach(message => { %>
             <li>

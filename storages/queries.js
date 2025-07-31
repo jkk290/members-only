@@ -40,7 +40,6 @@ async function getAllMessages() {
 };
 
 async function addMsg(message) {
-    console.log('Adding message: ', message);
     await pool.query('INSERT INTO messages (title, msg, date_added, author) VALUES ($1, $2, $3, $4)', [
         message.title,
         message.msg,
@@ -49,10 +48,22 @@ async function addMsg(message) {
     ]);
 };
 
+async function getMembershipPw() {
+    const { rows } = await pool.query('SELECT * FROM membership_pw');
+
+    return rows[0];
+}
+
+async function activateMembership(id) {
+    await pool.query('UPDATE users SET membership = true WHERE id = $1', [id]);
+}
+
 module.exports = {
     addUser,
     getUser,
     getUserById,
     getAllMessages,
-    addMsg
+    addMsg,
+    getMembershipPw,
+    activateMembership
 };

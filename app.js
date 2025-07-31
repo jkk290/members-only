@@ -8,6 +8,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const db = require('./storages/queries');
 const appRouter = require('./routes/appRouter');
 const msgRouter = require('./routes/msgRouter');
+const memberRouter = require('./routes/memberRouter');
 
 const app = express();
 const PORT = process.env.APP_PORT;
@@ -57,6 +58,7 @@ passport.deserializeUser(async (id, done) => {
     }
 });
 
+app.use('/members', memberRouter);
 app.use('/messages', msgRouter);
 app.use('/', appRouter);
 
