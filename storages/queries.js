@@ -30,7 +30,9 @@ async function getUserById(id) {
 };
 
 async function getAllMessages() {
-    const { rows } = await pool.query('SELECT * FROM messages');
+    const { rows } = await pool.query(
+        'SELECT m.id, m.title, m.msg, m.date_added, u.first_name, u.last_name FROM messages as m JOIN users as u ON m.author = u.id'
+    );
 
     if (rows.length > 0) {
         return rows;
@@ -46,6 +48,10 @@ async function addMsg(message) {
         message.date,
         message.author
     ]);
+};
+
+async function deleteMsg(id) {
+    await pool.query('DELETE FROM messages where id = $1', [id]);
 };
 
 async function getMembershipPw() {
@@ -64,6 +70,7 @@ module.exports = {
     getUserById,
     getAllMessages,
     addMsg,
+    deleteMsg,
     getMembershipPw,
     activateMembership
 };

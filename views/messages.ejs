@@ -7,10 +7,7 @@
 </head>
 <body>
     <%= title %>
-    <% if (isMember) { %>
-        <br>
-        <a href="/messages/add">New Message</a>
-    <% } else { %>
+    <% if (!isMember) { %>
         <br>
         <a href="/members/enroll">Unlock member features </a>
     <% } %>
@@ -18,6 +15,8 @@
     <form action="/logout" method="POST">
         <button type="submit">Logout</button>
     </form>
+    <br>
+    <a href="/messages/add">New Message</a>
     <ul>
         <% messages.forEach(message => { %>
             <li>
@@ -25,7 +24,12 @@
                 <p><%= message.msg %></p>
                 <% if (isMember == true) { %>
                     <p>Added: <%= message.date_added %></p>
-                    <p>By: <%= message.author %></p>
+                    <p>By: <%= message.first_name %>  <%= message.last_name %></p>
+                <% } %>
+                <% if (isAdmin == true) { %>
+                    <form action="/messages/<%= message.id %>/delete" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
                 <% } %>
             </li>
         <% }) %>

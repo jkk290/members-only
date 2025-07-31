@@ -6,5 +6,6 @@ msgRouter = Router();
 msgRouter.get('/add', msgController.addMsgGet);
 msgRouter.get('/', msgController.msgListGet);
 msgRouter.post('/add', msgController.addMsgPost);
+msgRouter.post('/:id/delete', msgController.deleteMsgPost);
 
 module.exports = msgRouter;

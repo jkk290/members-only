@@ -2,9 +2,13 @@ const db = require('../storages/queries');
 const bcrypt = require('bcryptjs');
 
 exports.enrollMemberGet = (req, res) => {
-    res.render('memberEnroll', {
-        title: 'Member Enrollment'
-    });
+    if (!req.user) {
+        res.redirect('/');
+    } else {
+        res.render('memberEnroll', {
+            title: 'Member Enrollment'
+        });
+    };
 };
 
 exports.enrollMemberPost = async (req, res) => {
@@ -17,5 +21,5 @@ exports.enrollMemberPost = async (req, res) => {
         res.redirect('/messages');
     } else {
         res.redirect('/members/enroll');
-    }
+    };
 };
